@@ -1,4 +1,4 @@
-const moment = require('moment');
+const dayjs = require('dayjs');
 
 const db = require('../infra/dbMockado');
 
@@ -48,7 +48,7 @@ class Tarefa {
   }
 
   _defineDataCriacao() {
-    return moment().format('YYYY-DD-MM HH:mm:ss');
+    return dayjs().format('YYYY-DD-MM HH:mm:ss');
   }
 }
 
