@@ -17,5 +17,5 @@ Modelo de API TODO list desenvolvido na aula da Turma 8 junto com a facilitadora
 
 ### Tarefa
 * GET   `/api/tarefas`
-* GET   `/api/usuario/:id`
+* GET   `/api/tarefa/:id`
 * POST  `/api/tarefa`
