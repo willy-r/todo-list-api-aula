@@ -1,17 +1,19 @@
 
-# To Do List Api
+# TODO List API
 
 ## (:construction: Em construção)
 
-Modelo de API To Do list desenvolvido junto a Turma 8 da Resilia Educação no módulo 4 do curso de Desenvolvimento Web.
+Modelo de API TODO list desenvolvido na aula da Turma 8 junto com a facilitadora [Cinthia](#cinthia-gh);
 
 
 ## Rotas
 
 ### Usuário
-* GET   `/api/usuarios`
-* GET   `/api/usuario/:id`
-* POST  `/api/usuario`
+* GET    `/api/usuarios`
+* GET    `/api/usuario/:id`
+* GET    `/api/usuario/email/:email`
+* POST   `/api/usuario`
+* DELETE `/api/usuario/:email`
 
 ### Tarefa
 * GET   `/api/tarefas`
