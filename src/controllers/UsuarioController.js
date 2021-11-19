@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const Usuario = require('../models/Usuario');
 
 const UsuarioController = (app, db) => {
@@ -60,6 +61,35 @@ const UsuarioController = (app, db) => {
         msg: err.message,
       });
     }
+  });
+
+  app.patch('/api/usuario/:email', (req, res) => {
+    const email = req.params.email;
+    const indexUsuario = db.usuario.findIndex((usuario) => usuario.email === email);
+
+    if (indexUsuario === -1) {
+      res.json({
+        erro: true,
+        msg: 'Usuário não encontrado',
+      });
+      return;
+    }
+
+    // Atualiza dados do usuário, pois ele existe.
+    const body = req.body;
+    const usuario = db.usuario[indexUsuario];
+    const usuarioAtualizado = {
+      nome: body.nome ? body.nome : usuario.nome,
+      email: body.email ? body.email : usuario.email,
+      senha: body.senha ? md5(body.senha) : usuario.senha,
+    };
+
+    db.usuario[indexUsuario] = usuarioAtualizado;
+
+    res.json({
+      erro: false,
+      dadosAtualizados: usuarioAtualizado,
+    });
   });
 
   app.delete('/api/usuario/:email', (req, res) => {

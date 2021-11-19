@@ -13,6 +13,7 @@ Modelo de API TODO list desenvolvido na aula da Turma 8 junto com a facilitadora
 * GET    `/api/usuario/:id`
 * GET    `/api/usuario/email/:email`
 * POST   `/api/usuario`
+* PUT    `/api/usuario/:email`
 * DELETE `/api/usuario/:email`
 
 ### Tarefa
