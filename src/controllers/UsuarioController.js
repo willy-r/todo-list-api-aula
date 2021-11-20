@@ -1,9 +1,25 @@
 const md5 = require('md5');
+
 const Usuario = require('../models/Usuario');
+const UsuarioDAO = require('../DAO/UsuarioDAO');
 
 const UsuarioController = (app, db) => {
-  app.get('/api/usuarios', (_, res) => {
-    res.json({ usuarios: db.usuario });
+  const DAO = new UsuarioDAO(db);
+
+  app.get('/api/usuarios', async (_, res) => {
+    try {
+      const usuarios = await DAO.listaUsuarios();
+      
+      res.json({
+        erro: false,
+        usuarios: usuarios,
+      });
+    } catch (err) {
+      res.json({
+        erro: true,
+        msg: err,
+      });
+    }
   });
   
   app.get('/api/usuario/:id', (req, res) => {
