@@ -64,12 +64,23 @@ const UsuarioController = (app, db) => {
     try {
       const usuario = new Usuario(body.nome, body.email, body.senha);
       
-      // Adiciona no banco de dados.
-      db.usuario.push(usuario);
-      
-      res.json({
-        erro: false,
-        usuarioCadastrado: usuario,
+      const query = `
+        INSERT INTO usuario (nome, email, senha)
+        VALUES
+          (?, ?, ?)
+        ;
+      `;
+      const params = [usuario.nome, usuario.email, usuario.senha];
+
+      db.run(query, params, function(err) {
+        if (err) {
+          throw new Error(err.message);
+        }
+
+        res.json({
+          erro: false,
+          idUsuario: this.lastID,
+        });
       });
     } catch (err) {
       res.json({

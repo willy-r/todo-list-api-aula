@@ -1,7 +1,5 @@
 const md5 = require('md5');
 
-const db = require('../infra/dbMockado');
-
 class Usuario {
   static id = 1;
 
@@ -21,12 +19,6 @@ class Usuario {
 
     if (!email || email.length > 100) {
       throw new Error('O email é obrigatório e precisa ter no máximo 100 caracteres');
-    } else {
-      const emailExiste = db.usuario.some((usuario) => usuario.email === email);
-
-      if (emailExiste) {
-        throw new Error('O email já está cadastrado');
-      }
     }
 
     if (!senha || senha.length < 6) {
