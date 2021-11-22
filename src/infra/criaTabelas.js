@@ -1,7 +1,7 @@
 const schemas = require('./schemas');
 
 function criaTabelaUsr(db) {
-  db.run(schemas.USUARIOS_SCHEMA, (err) => {
+  db.run(schemas.USUARIO_SCHEMA, (err) => {
     if (err) {
       console.log('Erro ao criar tabela de usuários');
       return;
@@ -11,8 +11,8 @@ function criaTabelaUsr(db) {
   });
 }
 
-function criaTabelaTarefas(db) {
-  db.run(schemas.TAREFAS_SCHEMA, (err) => {
+function criaTabelaTarefa(db) {
+  db.run(schemas.TAREFA_SCHEMA, (err) => {
     if (err) {
       console.log("Erro ao criar tabela de Tarefas");
       return;
@@ -24,5 +24,5 @@ function criaTabelaTarefas(db) {
 
 module.exports = {
   criaTabelaUsr,
-  criaTabelaTarefas,
+  criaTabelaTarefa,
 }

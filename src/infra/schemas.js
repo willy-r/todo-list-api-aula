@@ -1,27 +1,27 @@
 // Usuários
-const USUARIOS_SCHEMA = `
-  CREATE TABLE IF NOT EXISTS USUARIOS (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOME varchar(64),
-    EMAIL varchar(64),
-    SENHA varchar(64)
+const USUARIO_SCHEMA = `
+  CREATE TABLE IF NOT EXISTS usuario (
+    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome varchar(64),
+    email varchar(64),
+    senha varchar(64)
   );
 `;
 
 // Tarefas
-const TAREFAS_SCHEMA = `
-  CREATE TABLE IF NOT EXISTS TAREFAS (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT, 
-    TITULO VARCHAR(64),
-    DESCRICAO TEXT,
-    STATUS VARCHAR(32),
-    DATACRIACAO VARCHAR(32),
-    ID_USUARIO INTEGER,
-    FOREIGN KEY(ID_USUARIO) REFERENCES USUARIOD(ID)
+const TAREFA_SCHEMA = `
+  CREATE TABLE IF NOT EXISTS tarefas (
+    id_tarefa INTEGER PRIMARY KEY AUTOINCREMENT, 
+    titulo VARCHAR(64),
+    descricao TEXT,
+    status VARCHAR(32),
+    data_criacao VARCHAR(32),
+    id_usuario INTEGER,
+    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
   );
 `;
 
 module.exports = {
-  USUARIOS_SCHEMA,
-  TAREFAS_SCHEMA,
+  USUARIO_SCHEMA,
+  TAREFA_SCHEMA,
 };

@@ -2,7 +2,7 @@ const path = require('path');
 
 const sqlite3 = require('sqlite3').verbose();
 
-const { criaTabelaUsr, criaTabelaTarefas } = require('./criaTabelas');
+const { criaTabelaUsr, criaTabelaTarefa } = require('./criaTabelas');
 
 const caminhoArq = path.resolve('db.sqlite3');
 const db = new sqlite3.Database(caminhoArq, (err) => {
@@ -16,7 +16,7 @@ const db = new sqlite3.Database(caminhoArq, (err) => {
 
 db.serialize(() => {
   criaTabelaUsr(db);
-  criaTabelaTarefas(db);
+  criaTabelaTarefa(db);
 });
 
 // Encerra conexão quando fecha o servidor.
