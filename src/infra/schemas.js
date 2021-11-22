@@ -10,7 +10,7 @@ const USUARIO_SCHEMA = `
 
 // Tarefas
 const TAREFA_SCHEMA = `
-  CREATE TABLE IF NOT EXISTS tarefas (
+  CREATE TABLE IF NOT EXISTS tarefa (
     id_tarefa INTEGER PRIMARY KEY AUTOINCREMENT, 
     titulo VARCHAR(64),
     descricao TEXT,
