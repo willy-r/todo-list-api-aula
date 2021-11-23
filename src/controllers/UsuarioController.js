@@ -22,40 +22,23 @@ const UsuarioController = (app, db) => {
     }
   });
   
-  app.get('/api/usuario/:id', (req, res) => {
+  // queries: ?email=email_usuario ou ?id=usuario_id
+  app.get('/api/usuario/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    const usuario = db.usuario.filter((usuario) => usuario.id === id);
-    
-    if (!usuario.length) {
+
+    try {
+      const usuario = await DAO.buscaUsuarioPorId(id);
+
+      res.json({
+        erro: false,
+        usuario: usuario,
+      });
+    } catch (err) {
       res.json({
         erro: true,
-        msg: 'Usuário não encontrado',
+        msg: err,
       });
-      return;
     }
-
-    res.json({
-      erro: false,
-      usuario: usuario[0],
-    });
-  });
-
-  app.get('/api/usuario/email/:email', (req, res) => {
-    const email = req.params.email;
-    const usuario = db.usuario.filter((usuario) => usuario.email === email);
-    
-    if (!usuario.length) {
-      res.json({
-        erro: true,
-        msg: 'Usuário não encontrado',
-      });
-      return;
-    }
-
-    res.json({
-      erro: false,
-      usuario: usuario[0],
-    });
   });
 
   app.post('/api/usuario', async (req, res) => {

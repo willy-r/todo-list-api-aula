@@ -18,6 +18,29 @@ class UsuarioDAO {
     });
   }
 
+  buscaUsuarioPorId(id) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT * FROM usuario
+        WHERE id_usuario = ?;
+      `;
+
+      this._db.get(query, id, (err, linha) => {
+        if (err) {
+          reject(`Erro ao consultar banco de dados: ${err.messsage}`);
+          return;
+        }
+
+        if (!linha) {
+          reject(`Usuário com ID ${id} não encontrado`);
+          return;
+        }
+
+        resolve(linha);
+      });
+    });
+  }
+
   criaUsuario(usuario) {
     return new Promise((resolve, reject) => {
       const query = `
