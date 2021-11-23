@@ -58,34 +58,22 @@ const UsuarioController = (app, db) => {
     });
   });
 
-  app.post('/api/usuario', (req, res) => {
+  app.post('/api/usuario', async (req, res) => {
     const body = req.body;
 
     try {
+      // TODO: Verificar se email do usuário já existe.
       const usuario = new Usuario(body.nome, body.email, body.senha);
+      const infoUsarioCriado = await DAO.criaUsuario(usuario);
       
-      const query = `
-        INSERT INTO usuario (nome, email, senha)
-        VALUES
-          (?, ?, ?)
-        ;
-      `;
-      const params = [usuario.nome, usuario.email, usuario.senha];
-
-      db.run(query, params, function(err) {
-        if (err) {
-          throw new Error(err.message);
-        }
-
-        res.json({
-          erro: false,
-          idUsuario: this.lastID,
-        });
+      res.json({
+        erro: false,
+        info: infoUsarioCriado,
       });
     } catch (err) {
       res.json({
         erro: true,
-        msg: err.message,
+        msg: err,
       });
     }
   });
