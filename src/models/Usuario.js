@@ -1,12 +1,9 @@
 const md5 = require('md5');
 
 class Usuario {
-  static id = 1;
-
   constructor(nome, email, senha) {
     this._verificaDados(nome, email, senha);
 
-    this.id = Usuario.id++;
     this.nome = nome;
     this.email = email;
     this.senha = this._criptografaSenha(senha);
@@ -21,7 +18,7 @@ class Usuario {
       throw new Error('O email é obrigatório e precisa ter no máximo 100 caracteres');
     }
 
-    if (!senha || senha.length < 6) {
+    if (!senha || senha.length > 255 || senha.length < 6) {
       throw new Error('A senha é obrigatória e precisa ter pelo menos 6 caracteres');
     }
   }

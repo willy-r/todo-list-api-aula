@@ -62,13 +62,12 @@ const UsuarioController = (app, db) => {
     const body = req.body;
 
     try {
-      // TODO: Verificar se email do usuário já existe.
       const usuario = new Usuario(body.nome, body.email, body.senha);
-      const infoUsarioCriado = await DAO.criaUsuario(usuario);
+      const infoUsuarioCriado = await DAO.criaUsuario(usuario);
       
       res.json({
         erro: false,
-        info: infoUsarioCriado,
+        info: infoUsuarioCriado,
       });
     } catch (err) {
       res.json({

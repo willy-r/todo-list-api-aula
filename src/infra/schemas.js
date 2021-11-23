@@ -2,9 +2,9 @@
 const USUARIO_SCHEMA = `
   CREATE TABLE IF NOT EXISTS usuario (
     id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome varchar(64),
-    email varchar(64),
-    senha varchar(64)
+    nome varchar(100),
+    email varchar(100) UNIQUE,
+    senha varchar(255)
   );
 `;
 
