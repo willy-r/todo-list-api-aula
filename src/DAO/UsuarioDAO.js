@@ -30,7 +30,9 @@ class UsuarioDAO {
 
       this._db.run(query, params, function(err) {
         if (err) {
-          reject(`Erro ao adicionar usuário no banco de dados: ${err.message}`);
+          reject(err.errno === 19
+                 ? 'Email já está cadastrado'
+                 : `Erro ao adicionar usuário no banco de dados: ${err.message}`);
           return;
         }
 
