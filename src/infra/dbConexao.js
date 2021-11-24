@@ -4,15 +4,21 @@ const sqlite3 = require('sqlite3').verbose();
 
 const { criaTabelaUsr, criaTabelaTarefa } = require('./criaTabelas');
 
-const criaDB = (caminhoArqRel) => {
-  const caminhoArq = path.resolve(caminhoArqRel);
-  const db = new sqlite3.Database(caminhoArq, (err) => {
+const criaDB = (teste) => {
+  let caminhoArq = 'db.sqlite3';
+  
+  if (teste) {
+    caminhoArq = 'test.db.sqlite3';
+  }
+  
+  const caminhoArqAbs = path.resolve(caminhoArq);
+  const db = new sqlite3.Database(caminhoArqAbs, (err) => {
     if (err) {
       console.log('Deu erro ao criar banco de dados');
       return;
     }
 
-    console.log('Cria banco de dados SQLite em ' + caminhoArq);
+    console.log('Cria banco de dados SQLite em ' + caminhoArqAbs);
   });
 
   // Cria as tabelas se não existirem.

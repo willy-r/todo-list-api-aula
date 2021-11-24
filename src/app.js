@@ -1,10 +1,6 @@
 const customExpress = require('./config/customExpress');
-const criaDB = require('./infra/dbConexao');
 
-const caminhoArqRel = 'db.sqlite3';
-const db = criaDB(caminhoArqRel);
-
-const app = customExpress(db);
+const app = customExpress(false);
 const PORT = 3000;
 
 // Iniciando o servidor na porta designada.

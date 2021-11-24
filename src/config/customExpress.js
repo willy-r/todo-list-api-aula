@@ -4,12 +4,17 @@ const consign = require('consign');
 // Banco de dados mockado usado para atividades em aula.
 // const db = require('../infra/dbMockado');
 
-const customExpress = (db) => {
+const criaDB = require('../infra/dbConexao');
+
+const customExpress = (caminhoDB) => {
   const app = express();
   
   // Middlewares.
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // Banco de dados.
+  const db = criaDB(caminhoDB);
 
   // Rotas.
   consign().include('./src/controllers').into(app, db);
