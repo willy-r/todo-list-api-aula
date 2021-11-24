@@ -1,6 +1,6 @@
 const schemas = require('./schemas');
 
-function criaTabelaUsr(db) {
+const criaTabelaUsr = (db) => {
   db.run(schemas.USUARIO_SCHEMA, (err) => {
     if (err) {
       console.log('Erro ao criar tabela de usuários');
@@ -11,7 +11,7 @@ function criaTabelaUsr(db) {
   });
 }
 
-function criaTabelaTarefa(db) {
+const criaTabelaTarefa = (db) => {
   db.run(schemas.TAREFA_SCHEMA, (err) => {
     if (err) {
       console.log("Erro ao criar tabela de Tarefas");

@@ -1,12 +1,10 @@
 const express = require('express');
 const consign = require('consign');
 
-// Banco de dados mockado usado para testes em aula.
+// Banco de dados mockado usado para atividades em aula.
 // const db = require('../infra/dbMockado');
 
-const db = require('../infra/dbConexao');
-
-const customExpress = () => {
+const customExpress = (db) => {
   const app = express();
   
   // Middlewares.
