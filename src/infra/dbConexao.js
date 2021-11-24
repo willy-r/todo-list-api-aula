@@ -2,6 +2,8 @@ const path = require('path');
 
 const sqlite3 = require('sqlite3').verbose();
 
+const { criaTabelaUsr, criaTabelaTarefa } = require('./criaTabelas');
+
 const criaDB = (caminhoArqRel) => {
   const caminhoArq = path.resolve(caminhoArqRel);
   const db = new sqlite3.Database(caminhoArq, (err) => {
@@ -10,7 +12,13 @@ const criaDB = (caminhoArqRel) => {
       return;
     }
 
-    console.log('Cria banco de dados SQLite em ' + caminhoArq)
+    console.log('Cria banco de dados SQLite em ' + caminhoArq);
+  });
+
+  // Cria as tabelas se não existirem.
+  db.serialize(() => {
+    criaTabelaUsr(db);
+    criaTabelaTarefa(db);
   });
 
   // Encerra conexão quando fecha o servidor.
