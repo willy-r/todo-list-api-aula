@@ -63,6 +63,38 @@ class UsuarioDAO {
       });
     });  
   }
+
+  deletaUsuario(id) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        DELETE FROM usuario
+        WHERE id_usuario = ?;
+      `;
+
+      this._db.run(query, id, function(err) {
+        if (err) {
+          reject({
+            statusCode: 500,
+            message: `Erro ao deletar usuário: ${err.message}`,
+          });
+          return;
+        }
+
+        if (!this.changes) {
+          reject({
+            statusCode: 404,
+            message: `Usuário com ID ${id} não encontrado`,
+          });
+          return;
+        }
+
+        resolve({
+          deletou: this.changes,
+          idUsuario: id,
+        });
+      });
+    });
+  }
 }
 
 module.exports = UsuarioDAO;

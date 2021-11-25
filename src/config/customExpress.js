@@ -7,16 +7,16 @@ const cors = require('cors');
 
 const criaDB = require('../infra/dbConexao');
 
-const customExpress = (caminhoDB) => {
+const customExpress = (taTestando) => {
   const app = express();
   
   // Middlewares.
-  app.use(cors());
+  app.use(cors()); // Habilita CORS para todas as requisições de todas as origens.
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
   // Banco de dados.
-  const db = criaDB(caminhoDB);
+  const db = criaDB(taTestando);
 
   // Rotas.
   consign().include('./src/controllers').into(app, db);

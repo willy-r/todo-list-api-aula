@@ -22,7 +22,6 @@ const UsuarioController = (app, db) => {
     }
   });
   
-  // queries: ?email=email_usuario ou ?id=usuario_id
   app.get('/api/usuario/:id', async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -89,29 +88,22 @@ const UsuarioController = (app, db) => {
     });
   });
 
-  app.delete('/api/usuario/:email', (req, res) => {
-    const email = req.params.email;
+  app.delete('/api/usuario/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
 
-    // Pega o index do usuário no banco de dados.
-    // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
-    const indexUsuario = db.usuario.findIndex((usuario) => usuario.email === email);
-    
-    if (indexUsuario === -1) {
-      res.json({
-        erro: true,
-        msg: 'Usuário não encontrado',
+    try {
+      const infoUsuarioDeletado = await DAO.deletaUsuario(id);
+
+      res.status(200).json({
+        erro: false,
+        info: infoUsuarioDeletado,
       });
-      return;
+    } catch (err) {
+      res.status(err.statusCode).json({
+        erro: true,
+        msg: err.message,
+      });
     }
-
-    // Remove usuário do banco de dados.
-    // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
-    const usuarioRemovido = db.usuario.splice(indexUsuario, 1);
-    
-    res.json({
-      erro: false,
-      usuarioRemovido: usuarioRemovido[0],
-    });
   });
 }
 
